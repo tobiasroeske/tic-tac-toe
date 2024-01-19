@@ -10,7 +10,7 @@ h1 {
 }
 
 #content {
-  margin-top: 300px;
+  margin-top: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,6 +41,32 @@ table td {
 
 table tr:first-child td {
   border-top: 0;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.mt-32 {
+    margin-top: 32px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
 }
 
 table tr td:first-child {
