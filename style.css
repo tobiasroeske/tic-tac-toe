@@ -1,0 +1,57 @@
+body {
+    background-color: #323232;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    font-size: 64px;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 50%;
+    table-layout: fixed;
+}
+
+td {
+    width: 33.33%;
+    height: 120px;
+    text-align: center;
+    font-size: 24px;
+    border: 5px solid white;
+    color: white;
+    cursor: pointer;
+}
+
+td:hover {
+   
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+td:first-child {
+    border-left: none; /* Entfernen der linken Grenze für die erste Zelle in jeder Reihe */
+}
+
+td:last-child {
+    border-right: none; /* Entfernen der rechten Grenze für die letzte Zelle in jeder Reihe */
+}
+
+tr:first-child td {
+    border-top: none; /* Entfernen der oberen Grenze für die Zellen in der ersten Reihe */
+}
+
+tr:last-child td {
+    border-bottom: none; /* Entfernen der unteren Grenze für die Zellen in der letzten Reihe */
+}
