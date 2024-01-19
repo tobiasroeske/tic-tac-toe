@@ -1,15 +1,15 @@
 
 
 let fields = [
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
 ];
 
 let currentPlayer = 'circle';
@@ -21,46 +21,59 @@ const WINNING_COMBINATIONS = [
 ];
 
 function init() {
-    render();
+  render();
 }
 
 function render() {
-    const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = '';
-    // Generate table HTML
-    let tableHtml = '<table>';
-    for (let i = 0; i < 3; i++) {
-        tableHtml += '<tr>';
-        for (let j = 0; j < 3; j++) {
-            const index = i * 3 + j;
-            let symbol = '';
-            if (fields[index] === 'circle') {
-                symbol = generateCircleSVG();
-            } else if (fields[index] === 'cross') {
-                symbol = generateCrossSVG();
-            }
-            tableHtml += `<td onclick="handleClick(this, ${index})">${symbol}</td>`;
-        }
-        tableHtml += '</tr>';
-    }
-    tableHtml += '</table>';
+  const contentDiv = document.getElementById('content');
+  contentDiv.innerHTML = '';
 
-    // Set table HTML to contentDiv
-    contentDiv.innerHTML = tableHtml;
+  const statusDiv = document.getElementById('status');
+  statusDiv.innerHTML = '';
+  statusDiv.innerHTML = `${currentPlayer === 'circle' ? generateCircleSVG() : generateCrossSVG()} ist am Zug`;
+  // Generate table HTML
+  let tableHtml = '<table>';
+  for (let i = 0; i < 3; i++) {
+    tableHtml += '<tr>';
+    for (let j = 0; j < 3; j++) {
+      const index = i * 3 + j;
+      let symbol = '';
+      if (fields[index] === 'circle') {
+        symbol = generateCircleSVG();
+      } else if (fields[index] === 'cross') {
+        symbol = generateCrossSVG();
+      }
+      tableHtml += `<td onclick="handleClick(this, ${index})">${symbol}</td>`;
+    }
+    tableHtml += '</tr>';
+  }
+  tableHtml += '</table>';
+
+  // Set table HTML to contentDiv
+  contentDiv.innerHTML = tableHtml;
 }
 
 function handleClick(cell, index) {
   if (fields[index] === null) {
-      fields[index] = currentPlayer;
-      cell.innerHTML = currentPlayer === 'circle' ? generateCircleSVG() : generateCrossSVG();
-      cell.onclick = null;
-      currentPlayer = currentPlayer === 'circle' ? 'cross' : 'circle';
+    fields[index] = currentPlayer;
+    cell.innerHTML = currentPlayer === 'circle' ? generateCircleSVG() : generateCrossSVG();
+    cell.onclick = null;
+    currentPlayer = currentPlayer === 'circle' ? 'cross' : 'circle';
+    const statusDiv = document.getElementById('status');
+    statusDiv.innerHTML = `${currentPlayer === 'circle' ? generateCircleSVG() : generateCrossSVG()} ist am Zug`;
 
-      if (isGameFinished()) {
-        const winCombination = getWinningCombination();
-        drawWinningLine(winCombination);
+    if (isGameFinished()) {
+      const winCombination = getWinningCombination();
+      drawWinningLine(winCombination);
+      showWinner();
     }
-  } 
+  }
+}
+
+function showWinner() {
+  const winnerDiv = document.getElementById('winner');
+  const winnerSymbol = currentPlayer !== 'circle' ? generateCircleSVG() : generateCrossSVG();
+  winnerDiv.innerHTML = `${winnerSymbol} hat gewonnen!`;
 }
 
 function isGameFinished() {
@@ -69,10 +82,10 @@ function isGameFinished() {
 
 function getWinningCombination() {
   for (let i = 0; i < WINNING_COMBINATIONS.length; i++) {
-      const [a, b, c] = WINNING_COMBINATIONS[i];
-      if (fields[a] === fields[b] && fields[b] === fields[c] && fields[a] !== null) {
-          return WINNING_COMBINATIONS[i];
-      }
+    const [a, b, c] = WINNING_COMBINATIONS[i];
+    if (fields[a] === fields[b] && fields[b] === fields[c] && fields[a] !== null) {
+      return WINNING_COMBINATIONS[i];
+    }
   }
   return null;
 }
@@ -150,7 +163,7 @@ function restartGame() {
     null
   ];
   currentPlayer = 'circle';
+  document.getElementById('winner').innerHTML = '';
   render();
 }
-  
-  
+
